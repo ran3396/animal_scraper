@@ -1,8 +1,12 @@
 import logging
+import os
+
+from utils import ensure_directory
 
 class HTMLGenerator:
     def __init__(self, data: dict, output_file: str, logger: logging.Logger):
         self.data = data
+        ensure_directory(os.path.dirname(output_file))
         self.output_file = output_file
         self.logger = logger
 
@@ -26,6 +30,9 @@ class HTMLGenerator:
             </body>
             </html>
             """
+
+            self.logger.info(f"HTML file generated at {self.output_file}")
+            
         except Exception as e:
             self.logger.exception(f"Failed to generate HTML content: {e}")
             return

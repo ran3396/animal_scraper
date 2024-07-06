@@ -57,6 +57,5 @@ The application uses a JSON configuration file located at `config/config.json`. 
 
 1. Navigate to the `tests` directory and run the test scripts:
     ```sh
-    cd tests
-    python -m unittest .\\test\\test_animal_scraper.py
+    python3 -m unittest tests/test_animal_scraper.py
     ```
