@@ -1,0 +1,5 @@
+{
+    "url": "https://en.wikipedia.org/wiki/List_of_animal_names",
+    "download_directory": "C:\\code\\animal_scraper\\output\\images",
+    "output_html": "output/result.html"
+}
