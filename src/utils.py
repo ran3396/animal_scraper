@@ -21,7 +21,7 @@ def read_config(config_path):
 
 # Ensure directory exists
 def ensure_directory(directory):
-    if not os.path.exists(directory):
+    if directory and not os.path.exists(directory):
         os.makedirs(directory)
 
 # Run a function in a new thread
