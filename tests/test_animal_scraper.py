@@ -32,7 +32,7 @@ class TestAnimalScraper(unittest.TestCase):
         downloader = Downloader(download_directory, self.logger)
         
         # Test the download_image method
-        downloader.download_image('https://example.com/image.jpg', 'image.jpg')
+        downloader.download_image('https://upload.wikimedia.org/wikipedia/commons/thumb/1/10/Tursiops_truncatus_01.jpg/250px-Tursiops_truncatus_01.jpg', 'image.jpg')
 
         # Check that the image exists in the download directory
         self.assertTrue(os.path.exists(os.path.join(download_directory, 'image.jpg')))

@@ -57,7 +57,11 @@ class Scraper:
             animal_url = 'https://en.wikipedia.org' + animal_link['href']
             animal_response = requests.get(animal_url)
             animal_soup = BeautifulSoup(animal_response.content, 'html.parser')
-            img_tag = animal_soup.find('table', {'class': 'infobox'}).find('img')
+            # Images can sometimes be in a table or a figure tag
+            if not animal_soup.find('table', {'class': 'infobox'}):
+                img_tag = animal_soup.find('figure', {'class': 'mw-halign-right'}).find('img')
+            else:
+                img_tag = animal_soup.find('table', {'class': 'infobox'}).find('img')
             if img_tag:
                 img_url = 'https:' + img_tag['src']
                 self.downloader.download_image(img_url, animel_name)

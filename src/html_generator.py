@@ -14,7 +14,7 @@ class HTMLGenerator:
             <body>
             <h1>Animal Adjectives</h1>
             <table border="1">
-                <tr><th>Animal</th><th>Adjective</th><th>Image</th></tr>
+                <tr><th>Animal</th><th>Collateral adjective</th><th>Image</th></tr>
             """
 
             for animel in self.data:
