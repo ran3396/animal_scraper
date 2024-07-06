@@ -7,10 +7,11 @@ from downloader import Downloader
 from utils import run_in_new_thread
 
 class Scraper:
-    def __init__(self, url: str, download_directory: str, logger: logging.Logger):
+    def __init__(self, url: str, download_directory: str, logger: logging.Logger, download_images: bool = True):
         self.url = url
         self.download_directory = download_directory
         self.downloader = Downloader(download_directory, logger)
+        self.download_images = download_images
         self.logger = logger
 
 
@@ -38,7 +39,7 @@ class Scraper:
                     if '/' in animal:
                         # In case the image name contains a '/', replace it with an underscore because it's not a valid file name character
                         animal = animal.replace('/', '_')
-                    if animal_link:
+                    if animal_link and self.download_images:
                         self._download_animal_image(animal_link, animal)
                     data[animal] = {'adjectives': adjectives, 'image': os.path.join(self.download_directory, animal + '.jpg')}
 

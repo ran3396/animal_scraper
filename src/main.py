@@ -8,7 +8,7 @@ def main():
     logger = setup_logging()
 
     # Next, we create an instance of the Scraper class and call the scrape method to get the data
-    scraper = Scraper(config['url'], config['download_directory'], logger)
+    scraper = Scraper(config['url'], config['download_directory'], logger, config['download_images'])
     data = scraper.scrape()
 
     # Finally, we create an instance of the HTMLGenerator class and call the generate method to create the HTML file

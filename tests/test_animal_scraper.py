@@ -1,5 +1,10 @@
 import unittest
 import os
+import sys
+import os
+
+# Add the parent directory to the Python path
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../src')))
 
 from scraper import Scraper
 from downloader import Downloader
@@ -14,7 +19,7 @@ class TestAnimalScraper(unittest.TestCase):
 
     def test_scrape(self):
         # Create a Scraper instance
-        scraper = Scraper(self.config['url'], self.config['download_directory'], self.logger)
+        scraper = Scraper(self.config['url'], self.config['download_directory'], self.logger, download_images=False)
 
         # Test the scrape method
         data = scraper.scrape()
@@ -32,7 +37,7 @@ class TestAnimalScraper(unittest.TestCase):
         downloader = Downloader(download_directory, self.logger)
         
         # Test the download_image method
-        downloader.download_image('https://upload.wikimedia.org/wikipedia/commons/thumb/1/10/Tursiops_truncatus_01.jpg/250px-Tursiops_truncatus_01.jpg', 'image.jpg')
+        downloader.download_image('https://upload.wikimedia.org/wikipedia/commons/thumb/1/10/Tursiops_truncatus_01.jpg/250px-Tursiops_truncatus_01.jpg', 'image')
 
         # Check that the image exists in the download directory
         self.assertTrue(os.path.exists(os.path.join(download_directory, 'image.jpg')))
