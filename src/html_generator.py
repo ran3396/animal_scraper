@@ -18,12 +18,14 @@ class HTMLGenerator:
             <body>
             <h1>Animal Adjectives</h1>
             <table border="1">
-                <tr><th>Animal</th><th>Collateral adjective</th><th>Image</th></tr>
+                <tr><th>Collateral adjective</th><th>Animals</th><th>Images</th></tr>
             """
 
-            for animel in self.data:
-                img_tag = f'<img src="{self.data[animel]["image"]}" alt="{animel}">' if self.data[animel]["image"] else ''
-                html_content += f"<tr><td>{animel}</td><td>{self.data[animel]['adjectives']}</td><td>{img_tag}</td></tr>"
+            for adjuctive in self.data:
+                # The dictionary looks like this: {'adjective': {'animals': ['animal1', 'animal2'], 'images': ['image1', 'image2']}}
+                # We want to create a table row for each adjective with the corresponding list of animals and list of images
+                image_tags = [f'<img src="{image}" alt="{animal}">' for animal, image in zip(self.data[adjuctive]['animals'], self.data[adjuctive]['images'])]
+                html_content += f"<tr><td>{adjuctive}</td><td>{self.data[adjuctive]['animals']}</td><td>{''.join(image_tags)}</td></tr>"
 
             html_content += """
             </table>

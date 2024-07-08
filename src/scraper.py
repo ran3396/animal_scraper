@@ -18,7 +18,8 @@ class Scraper:
     def scrape(self):
         '''
         Scrape the Wikipedia page for animal adjectives and download corresponding images.
-        Returns a dictionary with animal names as keys and a dictionary of adjectives and image paths as values.
+        Returns a dictionary with adjuctives as keys and a a dictionary that contains
+        animals as keys and list of animals as values and images as keys and image path as values.
         '''
         try:
             response = requests.get(self.url)
@@ -41,7 +42,13 @@ class Scraper:
                         animal = animal.replace('/', '_')
                     if animal_link and self.download_images:
                         self._download_animal_image(animal_link, animal)
-                    data[animal] = {'adjectives': adjectives, 'image': os.path.join(self.download_directory, animal + '.jpg')}
+                    for adjective in adjectives:
+                        adjective = adjective.strip()
+                        if adjective not in data:
+                            data[adjective] = {'animals': [animal], 'images': [os.path.join(self.download_directory, animal + '.jpg')]}
+                        else:
+                            data[adjective]['animals'].append(animal)
+                            data[adjective]['images'].append(os.path.join(self.download_directory, animal + '.jpg'))
 
             return data
         except Exception as e:
